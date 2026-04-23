@@ -1,0 +1,481 @@
+﻿<div class="dashboard">
+  <header class="dashboard__head">
+    <div class="dashboard__head-left">
+      <button
+        type="button"
+        class="dashboard__toggle"
+        (click)="toggleSidebar()"
+        [attr.aria-expanded]="!isSidebarCollapsed()"
+        aria-controls="dashboard-sidebar"
+        aria-label="Toggle sidebar"
+      >
+        <span class="dashboard__toggle-icon" aria-hidden="true">|||</span>
+        <span class="dashboard__toggle-text">{{
+          isSidebarCollapsed() ? 'Open menu' : 'Close menu'
+        }}</span>
+      </button>
+      <div class="dashboard__brand" role="button" tabindex="0" (click)="selectMenu('overview')">
+        <img class="dashboard__brand-logo" src="Service-forge.png" alt="ServiceForge logo" />
+        <span class="dashboard__status">Online</span>
+      </div>
+    </div>
+
+    <div class="dashboard__head-right">
+      <label class="dashboard__search" aria-label="Search">
+        <span class="dashboard__search-icon" aria-hidden="true">S</span>
+        <input type="search" placeholder="Search requests..." />
+      </label>
+
+      <button type="button" class="dashboard__icon-btn" aria-label="Notifications">
+        <span aria-hidden="true">N</span>
+      </button>
+
+      <button type="button" class="dashboard__profile" aria-label="Profile menu">
+        <span class="dashboard__avatar" aria-hidden="true">SA</span>
+        <span class="dashboard__profile-text">Sajjad Admin</span>
+      </button>
+
+      <button type="button" class="dashboard__out" (click)="signOut()">Sign out</button>
+    </div>
+  </header>
+
+  <div class="dashboard__layout" [class.dashboard__layout--collapsed]="isSidebarCollapsed()">
+    <aside
+      id="dashboard-sidebar"
+      class="dashboard__sidebar"
+      [attr.aria-hidden]="isSidebarCollapsed()"
+      aria-label="Main menu"
+    >
+      <p class="dashboard__menu-title">Menu</p>
+      <nav class="dashboard__nav">
+        <details class="dashboard__group" open>
+          <summary class="dashboard__link dashboard__link--group">
+            <span class="dashboard__menu-label">
+              <span class="dashboard__menu-icon" aria-hidden="true">CS</span>
+              <span>Customer Support</span>
+            </span>
+          </summary>
+          <ul class="dashboard__submenu">
+            <li>
+              <button type="button" class="dashboard__sublink" (click)="selectMenu('maintenance')">
+                <span class="dashboard__submenu-icon" aria-hidden="true">MR</span>
+                <span>Maintainance Requisition Form</span>
+              </button>
+            </li>
+          </ul>
+        </details>
+
+        <details class="dashboard__group" open>
+          <summary class="dashboard__link dashboard__link--group">
+            <span class="dashboard__menu-label">
+              <span class="dashboard__menu-icon" aria-hidden="true">CR</span>
+              <span>Contract Renewal</span>
+            </span>
+          </summary>
+          <ul class="dashboard__submenu">
+            <li>
+              <button type="button" class="dashboard__sublink">
+                <span class="dashboard__submenu-icon" aria-hidden="true">EC</span>
+                <span>Existing Contract</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="dashboard__sublink">
+                <span class="dashboard__submenu-icon" aria-hidden="true">PM</span>
+                <span>Payment Method (Cash, Card/Cheque)</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="dashboard__sublink">
+                <span class="dashboard__submenu-icon" aria-hidden="true">IN</span>
+                <span>Installements</span>
+              </button>
+            </li>
+          </ul>
+        </details>
+
+        <button type="button" class="dashboard__link" (click)="selectMenu('enquiry')">
+          <span class="dashboard__menu-label">
+            <span class="dashboard__menu-icon" aria-hidden="true">EN</span>
+            <span>Enquiry</span>
+          </span>
+        </button>
+        <button type="button" class="dashboard__link" (click)="selectMenu('orderLeads')">
+          <span class="dashboard__menu-label">
+            <span class="dashboard__menu-icon" aria-hidden="true">OL</span>
+            <span>Order Leads</span>
+          </span>
+        </button>
+        <button type="button" class="dashboard__link" (click)="selectMenu('overview')">
+          <span class="dashboard__menu-label">
+            <span class="dashboard__menu-icon" aria-hidden="true">ST</span>
+            <span>Settings</span>
+          </span>
+        </button>
+        <button type="button" class="dashboard__link" (click)="selectMenu('sla')">
+          <span class="dashboard__menu-label">
+            <span class="dashboard__menu-icon" aria-hidden="true">SL</span>
+            <span>SLA Feature</span>
+          </span>
+        </button>
+      </nav>
+    </aside>
+
+    <main class="dashboard__body">
+      @if (activeMenu() === 'overview') {
+        <section class="overview">
+          <h2 class="dashboard__lede">Dashboard Overview</h2>
+          <p class="dashboard__text">Monitor service activity and workload at a glance.</p>
+
+          <div class="overview__widgets">
+            <article class="widget">
+              <p class="widget__label">Open Requests</p>
+              <p class="widget__value">128</p>
+              <p class="widget__trend widget__trend--up">+12% this week</p>
+            </article>
+            <article class="widget">
+              <p class="widget__label">Urgent Tickets</p>
+              <p class="widget__value">17</p>
+              <p class="widget__trend widget__trend--down">-3% from yesterday</p>
+            </article>
+            <article class="widget">
+              <p class="widget__label">Resolved Today</p>
+              <p class="widget__value">46</p>
+              <p class="widget__trend widget__trend--up">+8% productivity</p>
+            </article>
+            <article class="widget">
+              <p class="widget__label">SLA Compliance</p>
+              <p class="widget__value">94%</p>
+              <p class="widget__trend widget__trend--up">Healthy performance</p>
+            </article>
+          </div>
+
+          <div class="overview__charts">
+            <article class="chart-card">
+              <h3 class="chart-card__title">Service Mix</h3>
+              <div class="chart-card__pie-wrap">
+                <div class="chart-card__pie" role="img" aria-label="Service mix pie chart"></div>
+                <ul class="chart-card__legend">
+                  <li><span class="dot dot--ac"></span> AC Maintainance (28%)</li>
+                  <li><span class="dot dot--electrical"></span> Electrical (22%)</li>
+                  <li><span class="dot dot--mechanical"></span> Mechanical (19%)</li>
+                  <li><span class="dot dot--floor"></span> Floor/Painting (16%)</li>
+                  <li><span class="dot dot--annual"></span> Annual Maintaince (15%)</li>
+                </ul>
+              </div>
+            </article>
+            <article class="chart-card">
+              <h3 class="chart-card__title">Quick Insights</h3>
+              <ul class="insight-list">
+                <li>Peak arrival window: 10:00 - 12:00</li>
+                <li>Most requested unit: Block A / Unit 12</li>
+                <li>Helper required in 37% of today's jobs</li>
+                <li>Cleaning requested in 44% of jobs</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+      }
+
+      @if (activeMenu() === 'maintenance') {
+        @if (isAdmin()) {
+          <section class="request-card">
+            <div class="request-card__header">
+              <h2 class="dashboard__lede">Maintainance Requisition Form</h2>
+              <p class="dashboard__text">Create, save, and email a new service request.</p>
+            </div>
+
+            @if (requestMessage()) {
+              <div class="request-card__alert">{{ requestMessage() }}</div>
+            }
+
+            <form class="request-form" [formGroup]="maintenanceForm" (ngSubmit)="sendRequest()">
+              <div class="request-form__grid">
+                <label class="request-field">
+                  <span>User / BPartner</span>
+                  <input
+                    type="text"
+                    formControlName="userOrBPartner"
+                    placeholder="Enter user or partner"
+                  />
+                </label>
+
+                <label class="request-field">
+                  <span>Location</span>
+                  <input type="text" formControlName="location" placeholder="Enter location" />
+                </label>
+
+                <label class="request-field">
+                  <span>Unit</span>
+                  <input type="text" formControlName="unit" placeholder="Enter unit" />
+                </label>
+
+                <label class="request-field">
+                  <span>Kind of Services</span>
+                  <select formControlName="kindOfService">
+                    <option value="">Select kind of service</option>
+                    @for (service of serviceKinds; track service) {
+                      <option [value]="service">{{ service }}</option>
+                    }
+                  </select>
+                </label>
+
+                <label class="request-field">
+                  <span>Priority Level</span>
+                  <select formControlName="priorityLevel">
+                    <option value="">Select priority level</option>
+                    @for (priority of priorityLevels; track priority) {
+                      <option [value]="priority">{{ priority }}</option>
+                    }
+                  </select>
+                </label>
+
+                <label class="request-field">
+                  <span>Service Required: Date & Time</span>
+                  <input type="datetime-local" formControlName="serviceRequired" />
+                </label>
+
+                <label class="request-field">
+                  <span>Arrival Time: Date Time</span>
+                  <input type="datetime-local" formControlName="arrivalTime" />
+                </label>
+              </div>
+
+              <div class="request-form__checks">
+                <label
+                  ><input type="checkbox" formControlName="tenancyAvailable" /> Tenancy
+                  Availability</label
+                >
+                <label><input type="checkbox" formControlName="needHelper" /> Need Helper</label>
+                <label
+                  ><input type="checkbox" formControlName="needCleaning" /> Need Cleaning</label
+                >
+              </div>
+
+              <div class="request-form__actions">
+                <button type="submit" class="request-btn request-btn--primary">
+                  Send to create request
+                </button>
+                <button type="button" class="request-btn" (click)="cancelModify()">Cancel</button>
+                <button type="button" class="request-btn" (click)="editLatestRequest()">
+                  Edit
+                </button>
+              </div>
+            </form>
+          </section>
+        } @else {
+          <section class="request-card request-card--locked">
+            <h2 class="dashboard__lede">Maintainance Requisition Form</h2>
+            <p class="dashboard__text">Only admin users can access this form.</p>
+          </section>
+        }
+      }
+
+      @if (activeMenu() === 'sla') {
+        @if (isAdmin()) {
+          <section class="request-card">
+            <div class="request-card__header">
+              <h2 class="dashboard__lede">SLA Feature</h2>
+              <p class="dashboard__text">
+                Define service response and resolution targets for operations.
+              </p>
+            </div>
+
+            @if (slaMessage()) {
+              <div class="request-card__alert">{{ slaMessage() }}</div>
+            }
+
+            <form class="request-form" [formGroup]="slaForm" (ngSubmit)="saveSla()">
+              <div class="request-form__grid">
+                <label class="request-field">
+                  <span>Response Target (minutes)</span>
+                  <input type="number" min="1" formControlName="responseTargetMins" />
+                </label>
+                <label class="request-field">
+                  <span>Resolution Target (hours)</span>
+                  <input type="number" min="1" formControlName="resolutionTargetHours" />
+                </label>
+                <label class="request-field">
+                  <span>Escalation After (minutes)</span>
+                  <input type="number" min="1" formControlName="escalationAfterMins" />
+                </label>
+                <div class="request-field">
+                  <span>SLA Tracking</span>
+                  <label class="request-toggle">
+                    <input type="checkbox" formControlName="enabled" />
+                    <span>Enable SLA monitoring</span>
+                  </label>
+                </div>
+
+                <div class="request-field">
+                  <span>Compliance Documents</span>
+                  <div class="request-form__checks request-form__checks--tight">
+                    <label
+                      ><input type="checkbox" formControlName="includeSlaDocument" /> SLA
+                      Document</label
+                    >
+                    <label><input type="checkbox" formControlName="includeNda" /> NDA</label>
+                  </div>
+                </div>
+
+                <label class="request-field">
+                  <span>Attach SLA document / NDA</span>
+                  <input
+                    type="file"
+                    accept=".pdf,.doc,.docx"
+                    (change)="onSlaDocumentSelected($event)"
+                  />
+                  @if (slaAttachmentName()) {
+                    <small class="request-field__meta">Selected: {{ slaAttachmentName() }}</small>
+                  }
+                </label>
+              </div>
+
+              <div class="request-form__actions">
+                <button type="submit" class="request-btn request-btn--primary">Save SLA</button>
+              </div>
+            </form>
+          </section>
+        } @else {
+          <section class="request-card request-card--locked">
+            <h2 class="dashboard__lede">SLA Feature</h2>
+            <p class="dashboard__text">Only admin users can access SLA configuration.</p>
+          </section>
+        }
+      }
+
+      @if (activeMenu() === 'enquiry') {
+        @if (isCustomer()) {
+          <section class="request-card">
+            <div class="request-card__header">
+              <h2 class="dashboard__lede">Enquiry Form</h2>
+              <p class="dashboard__text">Share your service enquiry and our team will reach out.</p>
+            </div>
+            @if (enquiryMessage()) {
+              <div class="request-card__alert">{{ enquiryMessage() }}</div>
+            }
+            <form class="request-form" [formGroup]="enquiryForm" (ngSubmit)="submitEnquiry()">
+              <div class="request-form__grid">
+                <label class="request-field"
+                  ><span>Customer Name</span><input type="text" formControlName="customerName"
+                /></label>
+                <label class="request-field"
+                  ><span>Company Name</span><input type="text" formControlName="companyName"
+                /></label>
+                <label class="request-field"
+                  ><span>Email</span><input type="email" formControlName="email"
+                /></label>
+                <label class="request-field"
+                  ><span>Phone</span><input type="tel" formControlName="phone"
+                /></label>
+                <label class="request-field">
+                  <span>Enquiry Type</span>
+                  <select formControlName="enquiryType">
+                    <option value="">Select enquiry type</option>
+                    @for (type of enquiryTypes; track type) {
+                      <option [value]="type">{{ type }}</option>
+                    }
+                  </select>
+                </label>
+                <label class="request-field">
+                  <span>Preferred Contact</span>
+                  <select formControlName="preferredContact">
+                    @for (mode of contactModes; track mode) {
+                      <option [value]="mode">{{ mode }}</option>
+                    }
+                  </select>
+                </label>
+                <label class="request-field request-field--wide">
+                  <span>Message</span>
+                  <textarea rows="4" formControlName="message"></textarea>
+                </label>
+              </div>
+              <div class="request-form__actions">
+                <button type="submit" class="request-btn request-btn--primary">
+                  Submit Enquiry
+                </button>
+              </div>
+            </form>
+          </section>
+        } @else {
+          <section class="request-card request-card--locked">
+            <h2 class="dashboard__lede">Enquiry Form</h2>
+            <p class="dashboard__text">Only customer users can access enquiry form.</p>
+          </section>
+        }
+      }
+
+      @if (activeMenu() === 'orderLeads') {
+        @if (isCustomer()) {
+          <section class="request-card">
+            <div class="request-card__header">
+              <h2 class="dashboard__lede">Order Leads Form</h2>
+              <p class="dashboard__text">
+                Capture product and budget details for your upcoming order.
+              </p>
+            </div>
+            @if (orderLeadMessage()) {
+              <div class="request-card__alert">{{ orderLeadMessage() }}</div>
+            }
+            <form class="request-form" [formGroup]="orderLeadForm" (ngSubmit)="submitOrderLead()">
+              <div class="request-form__grid">
+                <label class="request-field"
+                  ><span>Customer Name</span><input type="text" formControlName="customerName"
+                /></label>
+                <label class="request-field"
+                  ><span>Company Name</span><input type="text" formControlName="companyName"
+                /></label>
+                <label class="request-field"
+                  ><span>Product / Service</span
+                  ><input type="text" formControlName="productService"
+                /></label>
+                <label class="request-field"
+                  ><span>Quantity</span><input type="number" min="1" formControlName="quantity"
+                /></label>
+                <label class="request-field"
+                  ><span>Expected Budget</span
+                  ><input type="number" min="1" formControlName="expectedBudget"
+                /></label>
+                <label class="request-field"
+                  ><span>Expected Closing Date</span
+                  ><input type="date" formControlName="expectedClosingDate"
+                /></label>
+                <label class="request-field">
+                  <span>Lead Source</span>
+                  <select formControlName="leadSource">
+                    @for (source of leadSources; track source) {
+                      <option [value]="source">{{ source }}</option>
+                    }
+                  </select>
+                </label>
+                <label class="request-field request-field--wide">
+                  <span>Notes</span>
+                  <textarea rows="4" formControlName="notes"></textarea>
+                </label>
+              </div>
+              <div class="request-form__actions">
+                <button type="submit" class="request-btn request-btn--primary">
+                  Save Order Lead
+                </button>
+              </div>
+            </form>
+          </section>
+        } @else {
+          <section class="request-card request-card--locked">
+            <h2 class="dashboard__lede">Order Leads Form</h2>
+            <p class="dashboard__text">Only customer users can access order leads form.</p>
+          </section>
+        }
+      }
+    </main>
+  </div>
+
+  @if (!isSidebarCollapsed()) {
+    <button
+      type="button"
+      class="dashboard__backdrop"
+      aria-label="Close sidebar"
+      (click)="closeSidebar()"
+    ></button>
+  }
+</div>
