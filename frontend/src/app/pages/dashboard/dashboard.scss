@@ -606,6 +606,30 @@
   color: #ffffff;
 }
 
+
+.record-list {
+  margin-top: 1rem;
+}
+
+.record-list__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.record-card {
+  background: #f8fafc;
+  border: 1px solid #dbe4ef;
+  border-radius: 0.65rem;
+  padding: 0.7rem;
+  color: #334155;
+  font-size: 0.8rem;
+}
+
+.record-card p {
+  margin: 0.1rem 0;
+}
+
 .dashboard__backdrop {
   display: none;
 }
@@ -671,6 +695,10 @@
   }
 
   .request-form__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .record-list__grid {
     grid-template-columns: 1fr;
   }
 

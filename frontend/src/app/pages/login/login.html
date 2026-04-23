@@ -1,20 +1,25 @@
 ﻿<div class="login-page">
-  <div class="login-panel" aria-hidden="true">
+  <section class="login-panel" aria-hidden="true">
     <div class="login-panel__content">
       <p class="login-panel__eyebrow">Customer service platform</p>
-      <h1 class="login-panel__title">ServiceForge</h1>
+      <img class="login-panel__logo" src="Service-forge.png" alt="ServiceForge logo" />
       <p class="login-panel__text">
-        Centralize service requests, approvals, and team collaboration for manufacturing
-        operations in one place.
+        Centralize service requests, approvals, and collaboration for manufacturing operations in one
+        secure platform.
       </p>
+      <div class="login-panel__chips">
+        <span class="chip">Real-time tracking</span>
+        <span class="chip">SLA workflow</span>
+        <span class="chip">Role-based access</span>
+      </div>
     </div>
-  </div>
+  </section>
 
-  <div class="login-form-wrap">
+  <section class="login-form-wrap">
     <div class="login-card">
       <div class="login-card__header">
-        <h2 class="login-card__title">Sign in</h2>
-        <p class="login-card__sub">Use your work email to continue</p>
+        <h2 class="login-card__title">Welcome back</h2>
+        <p class="login-card__sub">Sign in with your work account</p>
       </div>
 
       <div class="demo-credentials" role="note" aria-label="Demo login credentials">
@@ -39,9 +44,9 @@
             [attr.aria-invalid]="form.controls.email.touched && form.controls.email.invalid"
             placeholder="name@company.com"
           />
-          @if (form.controls.email.touched && form.controls.email.hasError("required")) {
+          @if (form.controls.email.touched && form.controls.email.hasError('required')) {
             <p class="field__hint field__hint--error">Email is required</p>
-          } @else if (form.controls.email.touched && form.controls.email.hasError("email")) {
+          } @else if (form.controls.email.touched && form.controls.email.hasError('email')) {
             <p class="field__hint field__hint--error">Enter a valid email</p>
           }
         </div>
@@ -59,12 +64,10 @@
             type="password"
             formControlName="password"
             autocomplete="current-password"
-            [attr.aria-invalid]="
-              form.controls.password.touched && form.controls.password.invalid
-            "
+            [attr.aria-invalid]="form.controls.password.touched && form.controls.password.invalid"
             placeholder="••••••••"
           />
-          @if (form.controls.password.touched && form.controls.password.hasError("required")) {
+          @if (form.controls.password.touched && form.controls.password.hasError('required')) {
             <p class="field__hint field__hint--error">Password is required</p>
           }
         </div>
@@ -79,7 +82,7 @@
             <span class="primary-btn__spinner" aria-hidden="true"></span>
             <span>Signing in...</span>
           } @else {
-            <span>Sign in</span>
+            <span>Sign in to ServiceForge</span>
           }
         </button>
       </form>
@@ -87,6 +90,7 @@
       <p class="login-card__foot">
         Need an account? <a routerLink="/login" fragment="contact">Contact your admin</a>
       </p>
+      <p class="login-card__foot login-card__foot--credit">Developed By : Engr Sajjad Panhwar</p>
     </div>
-  </div>
+  </section>
 </div>
