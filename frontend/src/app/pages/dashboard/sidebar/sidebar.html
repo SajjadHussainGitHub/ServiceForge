@@ -1,0 +1,100 @@
+<aside
+  id="dashboard-sidebar"
+  class="dashboard__sidebar"
+  [attr.aria-hidden]="isCollapsed"
+  aria-label="Main menu"
+>
+  <p class="dashboard__menu-title">Menu</p>
+  <nav class="dashboard__nav">
+    <details class="dashboard__group" open>
+      <summary class="dashboard__link dashboard__link--group">
+        <span class="dashboard__menu-label">
+          <span class="dashboard__menu-icon" aria-hidden="true">CS</span>
+          <span>Customer Support</span>
+        </span>
+      </summary>
+      <ul class="dashboard__submenu">
+        <li>
+          <button type="button" class="dashboard__sublink" (click)="menuSelect.emit('maintenance')">
+            <span class="dashboard__submenu-icon" aria-hidden="true">MR</span>
+            <span>Maintainance Requisition Form</span>
+          </button>
+        </li>
+      </ul>
+    </details>
+
+    <details class="dashboard__group" open>
+      <summary class="dashboard__link dashboard__link--group">
+        <span class="dashboard__menu-label">
+          <span class="dashboard__menu-icon" aria-hidden="true">CR</span>
+          <span>Contract Renewal</span>
+        </span>
+      </summary>
+      <ul class="dashboard__submenu">
+        <li>
+          <button
+            type="button"
+            class="dashboard__sublink"
+            (click)="menuSelect.emit('existingContractRenewal')"
+          >
+            <span class="dashboard__submenu-icon" aria-hidden="true">EC</span>
+            <span>Existing Contract</span>
+          </button>
+        </li>
+        <li>
+          <button type="button" class="dashboard__sublink" (click)="menuSelect.emit('paymentMethod')">
+            <span class="dashboard__submenu-icon" aria-hidden="true">PM</span>
+            <span>Payment Method (Cash, Card/Cheque)</span>
+          </button>
+        </li>
+        <li>
+          <div class="dashboard__sublink">
+            <span class="dashboard__submenu-icon" aria-hidden="true">IN</span>
+            <span>Installements</span>
+          </div>
+          <ul class="dashboard__submenu">
+            <li>
+              <button type="button" class="dashboard__sublink" (click)="menuSelect.emit('installmentsAdd')">
+                <span class="dashboard__submenu-icon" aria-hidden="true">IA</span>
+                <span>Add New</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="dashboard__sublink" (click)="menuSelect.emit('installmentsView')">
+                <span class="dashboard__submenu-icon" aria-hidden="true">IV</span>
+                <span>View All</span>
+              </button>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </details>
+
+    @if (isAdmin) {
+      <button type="button" class="dashboard__link" (click)="menuSelect.emit('enquiry')">
+        <span class="dashboard__menu-label">
+          <span class="dashboard__menu-icon" aria-hidden="true">EN</span>
+          <span>Enquiry</span>
+        </span>
+      </button>
+      <button type="button" class="dashboard__link" (click)="menuSelect.emit('orderLeads')">
+        <span class="dashboard__menu-label">
+          <span class="dashboard__menu-icon" aria-hidden="true">OL</span>
+          <span>Order Leads</span>
+        </span>
+      </button>
+    }
+    <button type="button" class="dashboard__link" (click)="menuSelect.emit('settings')">
+      <span class="dashboard__menu-label">
+        <span class="dashboard__menu-icon" aria-hidden="true">ST</span>
+        <span>Settings</span>
+      </span>
+    </button>
+    <button type="button" class="dashboard__link" (click)="menuSelect.emit('sla')">
+      <span class="dashboard__menu-label">
+        <span class="dashboard__menu-icon" aria-hidden="true">SL</span>
+        <span>SLA Feature</span>
+      </span>
+    </button>
+  </nav>
+</aside>

@@ -1,0 +1,39 @@
+<header class="dashboard__head">
+  <div class="dashboard__head-left">
+    <button
+      type="button"
+      class="dashboard__toggle"
+      (click)="toggleSidebar.emit()"
+      [attr.aria-expanded]="!isSidebarCollapsed"
+      aria-controls="dashboard-sidebar"
+      aria-label="Toggle sidebar"
+    >
+      <span class="dashboard__toggle-icon" aria-hidden="true">|||</span>
+      <span class="dashboard__toggle-text">{{
+        isSidebarCollapsed ? 'Open menu' : 'Close menu'
+      }}</span>
+    </button>
+    <div class="dashboard__brand" role="button" tabindex="0" (click)="goOverview.emit()">
+      <img class="dashboard__brand-logo" src="Service-forge.png" alt="ServiceForge logo" />
+      <span class="dashboard__status">Online</span>
+    </div>
+  </div>
+
+  <div class="dashboard__head-right">
+    <label class="dashboard__search" aria-label="Search">
+      <span class="dashboard__search-icon" aria-hidden="true">S</span>
+      <input type="search" placeholder="Search requests..." />
+    </label>
+
+    <button type="button" class="dashboard__icon-btn" aria-label="Notifications">
+      <span aria-hidden="true">N</span>
+    </button>
+
+    <button type="button" class="dashboard__profile" aria-label="Profile menu">
+      <span class="dashboard__avatar" aria-hidden="true">{{ initials }}</span>
+      <span class="dashboard__profile-text">{{ displayName }}</span>
+    </button>
+
+    <button type="button" class="dashboard__out" (click)="signOut.emit()">Sign out</button>
+  </div>
+</header>
