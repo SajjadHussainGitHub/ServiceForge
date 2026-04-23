@@ -12,21 +12,21 @@ The system is designed to reduce downtime, improve response times, and enhance c
 
 # 🎯 Key Features
 
-📌 Request Management
+# 📌 Request Management
 Create and manage service requests (Electrical, Mechanical, Maintenance, etc.)
 Attach supporting documents, images, or logs
 Priority-based request handling
-🔄 Workflow & Approval
+# 🔄 Workflow & Approval
 Configurable maker-checker approval process
 Multi-level approvals based on request type or severity
 Automated status transitions (Open → In Progress → Completed)
-👥 Role-Based Access Control
+# 👥 Role-Based Access Control
 Different roles such as Requester, Technician, Supervisor, Admin
 Controlled access to features and data
-📊 Dashboard & Monitoring
+# 📊 Dashboard & Monitoring
 Real-time dashboards for tracking requests
 SLA monitoring and performance insights
 Department-wise workload distribution
-🔔 Notifications & Alerts
+# 🔔 Notifications & Alerts
 Email/SMS/in-app notifications for updates
 Escalation alerts for delayed requests
